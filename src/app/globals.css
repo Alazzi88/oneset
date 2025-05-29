@@ -14,3 +14,13 @@
      الخلفية هتكون gradient ثابت */
 
 }
+/* ===== متحرّك الخلفية ===== */
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 400% 400%;
+  animation: gradientMove 18s ease infinite;
+}

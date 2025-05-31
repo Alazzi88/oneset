@@ -122,25 +122,25 @@ export default function Navbar() {
         <button
           className="md:hidden z-50"
           onClick={() => setOpen(o => !o)}
-          aria-label="Toggle menu"
+          aria-label="Toggle menu "
         >
           {open ? (
             <motion.div className="relative w-8 h-6">
               {/* X icon */}
               <motion.span
-                className="block h-0.5 bg-gray-800 absolute left-0 top-1"
+                className="block h-0.5 bg-red-600 absolute left-0 top-1"
                 animate={{ rotate: 45, y: 8 }}
                 transition={{ duration: 0.3 }}
                 style={{ width: '2rem' }}
               />
               <motion.span
-                className="block h-0.5 bg-gray-800 absolute left-0 top-3"
+                className="block h-0.5 bg-red-600 absolute left-0 top-3"
                 animate={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 style={{ width: '2.5rem' }}
               />
               <motion.span
-                className="block h-0.5 bg-gray-800 absolute left-0 top-5"
+                className="block h-0.5 bg-red-600 absolute left-0 top-5"
                 animate={{ rotate: -45, y: -8 }}
                 transition={{ duration: 0.3 }}
                 style={{ width: '1.5rem' }}
@@ -148,9 +148,9 @@ export default function Navbar() {
             </motion.div>
           ) : (
             <div className="relative w-8 h-6 flex flex-col justify-between">
-              <span className="block h-0.5 bg-gray-800" style={{ width: '2rem' }} />
-              <span className="block h-0.5 bg-gray-800" style={{ width: '2.5rem' }} />
-              <span className="block h-0.5 bg-gray-800" style={{ width: '1.5rem' }} />
+              <span className="block h-0.5 bg-red-600" style={{ width: '2rem' }} />
+              <span className="block h-0.5 bg-red-600" style={{ width: '2.5rem' }} />
+              <span className="block h-0.5 bg-red-600" style={{ width: '1.5rem' }} />
             </div>
           )}
         </button>
@@ -163,8 +163,8 @@ export default function Navbar() {
       className={`
         md:hidden
         fixed inset-x-0 top-24 bottom-0
-        bg-gray-800/60      /* خلفية رمادية شفافة تغطي العنصر بالكامل */
-        backdrop-blur-md    /* طمس خلفية العنصر بالكامل */
+        bg-gray-800/80      /* زدنا الشفافية ليصبح اللون أكثر قتامة */
+        backdrop-blur-md
         z-40
         flex flex-col items-center
         pt-4 space-y-6

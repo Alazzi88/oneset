@@ -1,4 +1,4 @@
-// src/app/layout.tsx
+// src/app/layout.tsx (بديل مع كتابة باللون الأبيض)
 import './globals.css';
 import type { ReactNode } from 'react';
 import Navbar from './components/Navbar';
@@ -7,7 +7,6 @@ import { Almarai } from 'next/font/google';
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollUpButton from './components/ScrollUpButton';
 
-// تحميل خط المراعي
 const almarai = Almarai({
   subsets: ['arabic'],
   weight: ['400', '700'],
@@ -26,7 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`
           ${almarai.className}
           flex flex-col min-h-screen
-          bg-gradient-to-br from-secondary via-secondary/80 to-primary
+          bg-gradient-to-br from-red-600 via-red-400 to-red-200
           text-white
         `}
       >

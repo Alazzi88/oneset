@@ -138,6 +138,20 @@ export default function ContactForm() {
           <option>الأهلي السعودي</option>
           <option>مصرف الراجحي</option>
           <option>بنك الرياض</option>
+          <option>بنك سامبا</option>
+                <option>بنك الإنماء</option>
+                <option>بنك البلاد</option>
+                <option>بنك الجزيرة</option>
+                <option>البنك السعودي الفرنسي</option>
+                <option>البنك السعودي البريطاني (ساب)</option>
+                <option>البنك العربي الوطني</option>
+                <option>البنك السعودي للاستثمار</option>
+                <option>بنك المدينة</option>
+                <option>بنك الخليج الدولي</option>
+                <option>بنك رقم</option>
+                <option>بنك التنمية الاجتماعية</option>
+            
+    
           {/* …باقي البنوك */}
         </select>
       </div>

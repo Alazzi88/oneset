@@ -18,6 +18,8 @@ const images = [
   '/img/img2.webp',
   '/img/img3.webp',
   '/img/img4.webp',
+  '/img/img5.webp',
+  '/img/img6.webp',
 ];
 
 const containerVariants = {

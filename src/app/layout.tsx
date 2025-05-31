@@ -26,8 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`
           ${almarai.className}
           flex flex-col min-h-screen
-          bg-gradient-to-br from-secondary via-secondary to-primary/80
-          animate-gradient           /* ✨ كلاس الحركة */
+          bg-gradient-to-br from-secondary via-secondary/80 to-primary
           text-white
         `}
       >

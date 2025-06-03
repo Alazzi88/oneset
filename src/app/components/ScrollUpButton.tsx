@@ -15,7 +15,8 @@ export default function ScrollUpButton() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (!visible) return null;
 
@@ -25,20 +26,21 @@ export default function ScrollUpButton() {
       onClick={scrollToTop}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: .6, ease: 'backOut' }}
+      transition={{ duration: 0.6, ease: 'backOut' }}
       whileHover={{ scale: 1.1 }}
       className="fixed bottom-6 right-6 z-50 focus:outline-none"
     >
-      <div className="w-14 h-14 rounded-full bg-primary shadow-lg flex items-center justify-center">
+      {/* الدائرة الرئيسية */}
+      <div className="relative w-14 h-14 rounded-full bg-yellow-500 shadow-lg flex items-center justify-center">
         <ArrowUp size={26} className="text-white" />
-      </div>
 
-      {/* نبضة */}
-      <motion.span
-        className="absolute inset-0 rounded-full bg-primary opacity-30"
-        animate={{ scale: [1, 1.8], opacity: [0.4, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: 'easeOut' }}
-      />
+        {/* نبضة */}
+        <motion.span
+          className="absolute inset-0 rounded-full bg-yellow-500 opacity-30"
+          animate={{ scale: [1, 1.8], opacity: [0.4, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: 'easeOut' }}
+        />
+      </div>
     </motion.button>
   );
 }

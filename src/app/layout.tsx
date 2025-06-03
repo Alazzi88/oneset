@@ -25,8 +25,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`
           ${almarai.className}
           flex flex-col min-h-screen
-          bg-gradient-to-br from-red-600 via-red-400 to-red-200
-          text-white
+      
+        
         `}
       >
         <Navbar />

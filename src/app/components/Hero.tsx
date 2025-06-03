@@ -1,98 +1,135 @@
-// src/app/components/Hero.tsx
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Almarai } from 'next/font/google';
+import React, { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import { Almarai } from 'next/font/google'
 
-// خط المراعي
 const almarai = Almarai({
   subsets: ['arabic'],
   weight: ['400', '700'],
   display: 'swap',
-});
+})
 
+// مصفوفة الصور بعد حذف التعليقات
 const images = [
-  '/img/img1.webp',
-  '/img/img2.webp',
-  '/img/img3.webp',
-  '/img/img4.webp',
   '/img/img5.webp',
-  '/img/img6.webp',
-];
+]
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.3 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-};
+const fadeDuration = 1.5   // مدة الفيد/أوت
+const displayDuration = 3  // مدة عرض كل صورة قبل الترانزيشن
 
 export default function Hero() {
-  const [index, setIndex] = useState(0);
+  const [current, setCurrent] = useState(0)
+  const [prev, setPrev] = useState<number | null>(null)
 
-  // بدّل الصورة كل 8 ثواني
+  // من أجل تبديل الصورة (حتى لو صورة واحدة) مع تأثير الفيد
   useEffect(() => {
-    const id = setInterval(
-      () => setIndex(i => (i + 1) % images.length),
-      8000
-    );
-    return () => clearInterval(id);
-  }, []);
+    const timer = setTimeout(() => {
+      setPrev(current)
+      setCurrent((current + 1) % images.length)
+    }, displayDuration * 1000)
+
+    return () => clearTimeout(timer)
+  }, [current])
+
+  // متغيّرات الحركة للمحتوى الأمامي (العنوان والفقرة والزر)
+  const contentVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+  }
+
+  // دالة تمرير سلس إلى قسم About
+  const scrollToAbout = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const aboutSection = document.getElementById('about')
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
-    <section
-      id="hero"
-      className="relative h-screen overflow-hidden"
-    >
-      {/* خلفيّة متبدّلة */}
-      <AnimatePresence mode="wait">
+    <section id="hero" className="relative h-screen overflow-hidden">
+      <AnimatePresence initial={false}>
+        {/* الصورة السابقة بتاريخ حركة fade-out */}
+        {prev !== null && (
+          <motion.div
+            key={`prev-${images[prev]}`}
+            className="absolute inset-0"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 0, scale: 1.1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: fadeDuration, ease: 'easeInOut' }}
+          >
+            <Image
+              src={images[prev]}
+              alt={`background-${prev}`}
+              fill
+              sizes="100vw"
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          </motion.div>
+        )}
+
+        {/* الصورة الحالية بتاريخ حركة fade-in */}
         <motion.div
-          key={images[index]}                // أهم حاجة عشان AnimatePresence يشتغل
-          className="absolute inset-0 bg-center bg-cover z-0"
-          style={{ backgroundImage: `url('${images[index]}')` }}
-          initial={{ opacity: 0, scale: 1.05 }}
+          key={`curr-${images[current]}`}
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{  opacity: 0, scale: 1.05 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-        />
+          transition={{ duration: fadeDuration, ease: 'easeInOut' }}
+        >
+          <Image
+            src={images[current]}
+            alt={`background-${current}`}
+            fill
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </motion.div>
       </AnimatePresence>
 
-      {/* طبقة تعتيم لونيّة */}
-      <div className="absolute inset-0 bg-secondary/70 z-10 pointer-events-none" />
+      {/* طبقة التعتيم فوق الصورة */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20 z-10 pointer-events-none" />
 
-      {/* المحتوى الأمامي */}
-      <motion.div
+      {/* المحتوى الأمامي مع أنيميشن احترافي */}
+      <div
         className={`${almarai.className} relative z-20 container mx-auto flex flex-col items-center justify-center h-full px-4 text-center`}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
       >
         <motion.h1
-          className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-white"
-          variants={itemVariants}
+          className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-white drop-shadow-2xl"
+          variants={contentVariants}
+          initial="hidden"
+          animate="visible"
+          viewport={{ once: true }}
         >
           نحن نبني أحلامك العقارية
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-2xl mb-8 max-w-2xl text-gray-100"
-          variants={itemVariants}
+          className="text-lg md:text-xl mb-8 max-w-2xl text-white/90 leading-relaxed"
+          variants={contentVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2 }}
         >
           أفضل الحلول العقارية لإدارة وبيع وتأجير الممتلكات بأعلى معايير الجودة والثقة.
         </motion.p>
 
         <motion.a
-          href="#services"
-          className="inline-block bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-full shadow-xl transition-transform hover:scale-105"
-          variants={itemVariants}
+          href="#about"
+          onClick={scrollToAbout}
+          className="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-500 text-white font-bold px-8 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-105"
+          variants={contentVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.4 }}
         >
           ابدأ الآن
         </motion.a>
-      </motion.div>
+      </div>
     </section>
-  );
+  )
 }

@@ -53,8 +53,8 @@ export default function Navbar() {
                 src="/img/logo.webp"
                 alt="DetailsRE"
                 width={160}
-                height={60}
-                className="h-8 w-auto object-contain bg-transparent"
+                height={70}
+                className="h-12 w-50 object-contain bg-transparent"
                 priority
               />
             </Link>
@@ -161,7 +161,7 @@ export default function Navbar() {
                 alt="DetailsRE"
                 width={160}
                 height={60}
-                className="h-8 w-auto object-contain bg-transparent"
+                className="h-12 w-50 object-contain bg-transparent"
                 priority
               />
             </Link>

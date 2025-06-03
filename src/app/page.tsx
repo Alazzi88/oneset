@@ -6,7 +6,6 @@ import CompanyMapEmbed from "./components/CompanyMapEmbed";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Services from "./components/Services";
-import ElegantHome from "./components/Hero";
 import RealEstateGallery from "./components/RealEstateGallery";
 
 export default function HomePage() {

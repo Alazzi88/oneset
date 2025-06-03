@@ -14,7 +14,7 @@ const almarai = Almarai({
 });
 
 export const metadata = {
-  title: 'DetailsRE',
+  title: 'Onset Scope',
   description: 'أفضل الحلول العقارية لإدارة وبيع وتأجير الممتلكات',
 };
 

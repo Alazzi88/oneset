@@ -5,7 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Almarai } from 'next/font/google';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const almarai = Almarai({
   subsets: ['arabic'],
@@ -28,6 +28,7 @@ export default function RealEstateGallery() {
       title: 'شقة دور أرضي',
       description: 'شقة مساحة 120 م، 3 غرف نوم، مطبخ مفتوح، تشطيب حديث مع إطلالة مميزة.',
       imageUrls: [
+        '/img/imgdown/imgdown10.webp',
         '/img/imgdown/imgdown1.webp',
         '/img/imgdown/imgdown2.webp',
         '/img/imgdown/imgdown3.webp',
@@ -37,7 +38,6 @@ export default function RealEstateGallery() {
         '/img/imgdown/imgdown7.webp',
         '/img/imgdown/imgdown8.webp',
         '/img/imgdown/imgdown9.webp',
-        '/img/imgdown/imgdown10.webp',
       ],
       location: 'الرياض، حي الرمال',
     },
@@ -46,6 +46,7 @@ export default function RealEstateGallery() {
       title: 'دور علوي',
       description: 'فيلا مساحة 450 م، تصميم مودرن، 5 غرف نوم، مسبح وحديقة خاصة.',
       imageUrls: [
+        '/img/imgdown/imgdown10.webp',
         '/img/imgdown/imgdown1.webp',
         '/img/imgdown/imgdown2.webp',
         '/img/imgdown/imgdown3.webp',
@@ -55,7 +56,6 @@ export default function RealEstateGallery() {
         '/img/imgdown/imgdown7.webp',
         '/img/imgdown/imgdown8.webp',
         '/img/imgdown/imgdown9.webp',
-        '/img/imgdown/imgdown10.webp',
       ],
       location: 'الرياض، حي الرمال',
     },
@@ -64,6 +64,7 @@ export default function RealEstateGallery() {
       title: 'دور علوي vip',
       description: 'روف مساحة 180 م، غرفتين، تراس واسع، تشطيب راقٍ مع إطلالة على الحي.',
       imageUrls: [
+        '/img/imgdown/imgdown10.webp',
         '/img/imgdown/imgdown1.webp',
         '/img/imgdown/imgdown2.webp',
         '/img/imgdown/imgdown3.webp',
@@ -73,7 +74,6 @@ export default function RealEstateGallery() {
         '/img/imgdown/imgdown7.webp',
         '/img/imgdown/imgdown8.webp',
         '/img/imgdown/imgdown9.webp',
-        '/img/imgdown/imgdown10.webp',
       ],
       location: 'الرياض، حي الرمال',
     },
@@ -114,47 +114,47 @@ interface PropertyCardProps { item: Listing; }
 function PropertyCard({ item }: PropertyCardProps) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalImageIndex, setModalImageIndex] = React.useState(0);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-
-  // slideshow effect
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % item.imageUrls.length);
-    }, 3000); // 3000ms for 3 seconds, change to 2000 for 2s
-    return () => clearInterval(interval);
-  }, [item.imageUrls.length]);
+  const [currentIndex] = React.useState(0); // ثابت، لا يتغير
 
   const openModal = (idx: number) => {
     setModalImageIndex(idx);
     setIsModalOpen(true);
   };
 
+  const showPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalImageIndex((prev) => (prev - 1 + item.imageUrls.length) % item.imageUrls.length);
+  };
+
+  const showNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalImageIndex((prev) => (prev + 1) % item.imageUrls.length);
+  };
+
   return (
-    <>  
+    <>
       <motion.div
         initial={{ scale: 1 }}
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
         className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg overflow-hidden flex flex-col"
       >
-        {/* الصورة الرئيسية */}
         <div className="relative w-full h-64 cursor-pointer" onClick={() => openModal(currentIndex)}>
           <Image
             src={item.imageUrls[currentIndex]}
-            alt={`${item.title} - صورة رقم ${currentIndex + 1}`}
+            alt={`${item.title} - صورة أساسية`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover rounded-t-2xl"
           />
         </div>
 
-        {/* شريط الصور المصغرة */}
         <div className="flex flex-row-reverse p-4 space-x-2 space-x-reverse overflow-x-auto">
           {item.imageUrls.map((url, idx) => (
             <div
               key={idx}
-              className={`relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border ${idx === currentIndex ? 'border-yellow-400' : 'border-gray-200'} cursor-pointer`}
-              onClick={() => { setCurrentIndex(idx); openModal(idx); }}
+              className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer"
+              onClick={() => openModal(idx)}
             >
               <Image
                 src={url}
@@ -167,7 +167,6 @@ function PropertyCard({ item }: PropertyCardProps) {
           ))}
         </div>
 
-        {/* تفاصيل العقار */}
         <div className="flex-1 px-6 pb-6 flex flex-col">
           <h3 className={`text-lg font-semibold text-gray-800 ${almarai.className} mb-1`}>{item.title}</h3>
           <p className={`${almarai.className} text-sm text-gray-600 mb-2`}>{item.location}</p>
@@ -179,7 +178,6 @@ function PropertyCard({ item }: PropertyCardProps) {
         </div>
       </motion.div>
 
-      {/* المودال */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -200,9 +198,22 @@ function PropertyCard({ item }: PropertyCardProps) {
               <img
                 src={item.imageUrls[modalImageIndex]}
                 alt={`${item.title} - صورة مكبرة ${modalImageIndex + 1}`}
+                // fill
                 sizes="(max-width: 640px) 90vw, 80vw"
                 className="object-contain rounded-lg"
               />
+              <button
+                onClick={showPrev}
+                className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 hover:bg-opacity-100"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={showNext}
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 hover:bg-opacity-100"
+              >
+                <ChevronRight size={24} />
+              </button>
               <X
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"

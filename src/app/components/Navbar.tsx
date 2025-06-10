@@ -54,7 +54,7 @@ export default function Navbar() {
                 alt="DetailsRE"
                 width={160}
                 height={70}
-                className="h-12 w-50 object-contain bg-transparent"
+                 className="h-12 w-auto object-contain bg-transparent"
                 priority
               />
             </Link>
@@ -116,33 +116,9 @@ export default function Navbar() {
             </Link>
           </div>
         </nav>
-
-        {/* خط كيرف متحرك أسفل الناف بار */}
-        <div className="w-full overflow-hidden -mb-1">
-          <motion.svg
-            className="w-full h-8"
-            viewBox="0 0 1440 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <motion.path
-              d="M0 40 C 360 0, 720 80, 1080 40 C 1260 20, 1350 60, 1440 40"
-              stroke="#FBBF24"
-              strokeWidth="4"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
-              }}
-            />
-          </motion.svg>
-        </div>
       </header>
 
+      {/* مسافة تعويض ارتفاع الهيدر */}
       <div className="h-[72px]" />
 
       <Dialog
@@ -161,7 +137,7 @@ export default function Navbar() {
                 alt="DetailsRE"
                 width={160}
                 height={60}
-                className="h-12 w-50 object-contain bg-transparent"
+                className="h-12 w-auto object-contain bg-transparent"
                 priority
               />
             </Link>

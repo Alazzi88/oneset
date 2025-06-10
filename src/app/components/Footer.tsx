@@ -1,7 +1,7 @@
 // src/app/components/Footer.tsx
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { X as XIcon, Instagram, Linkedin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Almarai } from 'next/font/google';
@@ -18,63 +18,19 @@ const navigation = {
     { name: 'Tanarcompany@gmail.com', href: 'mailto:Tanarcompany@gmail.com' },
   ],
   social: [
-    {
-      name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/YourProfile',
-    },
-    {
-      name: 'X',
-      href: 'https://x.com/YourProfile',
-    },
-    {
-      name: 'Instagram',
-      href: 'https://www.instagram.com/YourProfile',
-    },
-  ] as {
-    name: string;
-    href: string;
-  }[],
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/YourProfile' },
+    { name: 'X', href: 'https://x.com/YourProfile' },
+    { name: 'Instagram', href: 'https://www.instagram.com/YourProfile' },
+  ] as { name: string; href: string }[],
 };
 
 export default function Footer() {
   const [showPolicy, setShowPolicy] = useState(false);
 
-  // نولّد 6 مواضع عشوائية (٪) على المحور الرأسي للخطوط
-  const lines = useMemo(() => {
-    const arr: number[] = [];
-    for (let i = 0; i < 6; i++) {
-      arr.push(Math.random() * 100);
-    }
-    return arr;
-  }, []);
-
   return (
-    <footer className={`${almarai.className} relative overflow-hidden`}>
+    <footer className={`${almarai.className} relative overflow-hidden animate-none sm:animate-shake`}>
       {/* الخلفية الرمادية */}
       <div className="absolute inset-0 -z-10 bg-gray-900" />
-
-      {/* خطوط أفقية تتحرك عشوائياً في x و y */}
-      {lines.map((pos, idx) => {
-        const duration = 6 + Math.random() * 4;
-        return (
-          <motion.div
-            key={idx}
-            className="absolute left-0 w-full h-[1px] bg-white/10"
-            style={{ top: `${pos}%` }}
-            initial={{ x: idx % 2 === 0 ? '-100%' : '100%', y: '0%' }}
-            animate={{
-              x: idx % 2 === 0 ? ['-100%', '100%'] : ['100%', '-100%'],
-              y: ['-20%', '20%'],
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: 'loop',
-              duration,
-              ease: 'linear',
-            }}
-          />
-        );
-      })}
 
       <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
         <nav
@@ -101,7 +57,6 @@ export default function Footer() {
 
         {/* أزرار التواصل الاجتماعي (الشعار فقط) */}
         <div className="mt-20 sm:mt-16 flex items-center justify-center flex-wrap space-x-4">
-          {/* LinkedIn */}
           <a
             href={navigation.social[0].href}
             target="_blank"
@@ -118,7 +73,6 @@ export default function Footer() {
             <Linkedin className="md:w-6 md:h-6 w-5 h-5" />
           </a>
 
-          {/* X */}
           <a
             href={navigation.social[1].href}
             target="_blank"
@@ -134,7 +88,6 @@ export default function Footer() {
             <XIcon className="md:w-6 md:h-6 w-5 h-5" />
           </a>
 
-          {/* Instagram */}
           <a
             href={navigation.social[2].href}
             target="_blank"

@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 export default function ScrollUpButton() {
   const [visible, setVisible] = useState(false);
 
-  // إظهار الزر بعد التمرير 300px
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300);
     window.addEventListener('scroll', onScroll);

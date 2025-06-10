@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         `}
       >
         <Navbar />
-        <main className="flex-grow">{children}</main>
+         {children}
         <WhatsAppButton />
         <ScrollUpButton />
         <Footer />

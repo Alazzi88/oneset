@@ -11,7 +11,6 @@ const almarai = Almarai({
   display: 'swap',
 })
 
-// مصفوفة الصور بعد حذف التعليقات
 const images = [
   '/img/img5.webp',
 ]
@@ -23,7 +22,6 @@ export default function Hero() {
   const [current, setCurrent] = useState(0)
   const [prev, setPrev] = useState<number | null>(null)
 
-  // من أجل تبديل الصورة (حتى لو صورة واحدة) مع تأثير الفيد
   useEffect(() => {
     const timer = setTimeout(() => {
       setPrev(current)
@@ -94,7 +92,6 @@ export default function Hero() {
       {/* طبقة التعتيم فوق الصورة */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20 z-10 pointer-events-none" />
 
-      {/* المحتوى الأمامي مع أنيميشن احترافي */}
       <div
         className={`${almarai.className} relative z-20 container mx-auto flex flex-col items-center justify-center h-full px-4 text-center`}
       >

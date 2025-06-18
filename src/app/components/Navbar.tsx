@@ -131,7 +131,7 @@ export default function Navbar() {
         <DialogPanel className="fixed inset-0 z-50 bg-gray-900 px-6 py-6 overflow-y-auto">
           <div className="flex items-center justify-between mb-6">
             <Link href="/" className="-m-1.5 p-1.5 bg-transparent">
-              <span className="sr-only">DetailsRE</span>
+              <span className="sr-only">Onest Scope</span>
               <Image
                 src="/img/logo.webp"
                 alt="DetailsRE"

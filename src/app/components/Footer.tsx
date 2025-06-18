@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
-import { X as XIcon, Instagram, Linkedin } from 'lucide-react';
+import { X as XIcon, Instagram } from 'lucide-react';
+import { SiTiktok } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Almarai } from 'next/font/google';
 
@@ -17,8 +18,8 @@ const navigation = {
     { name: 'Onstscop1@gmail.com', href: 'mailto:Onstscop1@gmail.com' },
   ],
   social: [
-    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/YourProfile' },
-    { name: 'X', href: 'https://x.com/YourProfile' },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@YourProfile' },
+    { name: 'X',      href: 'https://x.com/YourProfile' },
     { name: 'Instagram', href: 'https://www.instagram.com/YourProfile' },
   ] as { name: string; href: string }[],
 };
@@ -28,15 +29,15 @@ export default function Footer() {
 
   return (
     <footer className={`${almarai.className} relative overflow-hidden animate-none sm:animate-shake`}>
-      {/* الخلفية الرمادية */}
       <div className="absolute inset-0 -z-10 bg-gray-900" />
 
       <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
+        {/* contacts */}
         <nav
           aria-label="Footer"
           className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6"
         >
-          {navigation.main.map((item) => (
+          {navigation.main.map(item => (
             <a
               key={item.name}
               href={item.href}
@@ -45,28 +46,24 @@ export default function Footer() {
               {item.name}
             </a>
           ))}
-
-          <span className="text-gray-200 px-3 py-1 rounded-md bg-gray-800/50">
-            سجل تجاري: 1010970757
-          </span>
+        
         </nav>
 
-        {/* أزرار التواصل الاجتماعي (الشعار فقط) */}
-        <div className="mt-20 sm:mt-16 flex items-center justify-center flex-wrap space-x-4">
+        {/* social */}
+        <div className="mt-20 sm:mt-16 flex items-center justify-center space-x-4">
           <a
             href={navigation.social[0].href}
             target="_blank"
             rel="noopener noreferrer"
             className="
               mx-[10px] flex items-center justify-center text-white 
-              bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 
-              hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 
-              shadow-lg shadow-blue-600/50 
-              rounded-full 
-              sm:p-3 p-2 mt-4
+              bg-gradient-to-r from-black via-gray-800 to-gray-900 
+              hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-500 
+              shadow-lg shadow-black/50 
+              rounded-full sm:p-3 p-2 mt-4
             "
           >
-            <Linkedin className="md:w-6 md:h-6 w-5 h-5" />
+            <SiTiktok className="md:w-6 md:h-6 w-5 h-5" />
           </a>
 
           <a
@@ -77,8 +74,7 @@ export default function Footer() {
               mx-[10px] flex items-center justify-center text-white 
               bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-500 
               shadow-lg shadow-black/50 
-              rounded-full 
-              sm:p-3 p-2 mt-4
+              rounded-full sm:p-3 p-2 mt-4
             "
           >
             <XIcon className="md:w-6 md:h-6 w-5 h-5" />
@@ -93,17 +89,17 @@ export default function Footer() {
               bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 
               hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 
               shadow-lg shadow-pink-500/50 
-              rounded-full 
-              sm:p-3 p-2 mt-4
+              rounded-full sm:p-3 p-2 mt-4
             "
           >
             <Instagram className="md:w-6 md:h-6 w-5 h-5" />
           </a>
         </div>
 
+        {/* privacy toggle */}
         <div className="mt-10 flex justify-center">
           <button
-            onClick={() => setShowPolicy((prev) => !prev)}
+            onClick={() => setShowPolicy(prev => !prev)}
             className="text-gray-200 hover:text-white focus:outline-none transition-colors duration-200"
           >
             سياسة الخصوصية
@@ -120,12 +116,10 @@ export default function Footer() {
               className="mt-4 px-6 py-4 bg-gray-800/70 rounded-lg backdrop-blur-sm text-gray-200 max-w-3xl mx-auto"
             >
               <p className="leading-relaxed">
-                نحن نحترم خصوصيتكم ونلتزم بحماية معلوماتكم. نجمع فقط البيانات
-                الضرورية لتحسين خدماتنا، ولا نشاركها مع أي طرف ثالث إلا للالتزام
-                بالقوانين. يمكنكم طلب حذف بياناتكم أو تعديلها في أي وقت من خلال
-                التواصل معنا عبر البريد الإلكتروني. تُخزن المعلومات على خوادم آمنة
-                ونستخدم تشفير HTTPS لحماية النقل. للمزيد من التفاصيل، تواصلوا
-                معنا عبر Onstscop1@gmail.com.
+                نحن نحترم خصوصيتكم ونلتزم بحماية معلوماتكم. نجمع فقط البيانات الضرورية لتحسين خدماتنا،
+                ولا نشاركها مع أي طرف ثالث إلا للالتزام بالقوانين. يمكنكم طلب حذف بياناتكم أو تعديلها
+                في أي وقت من خلال التواصل معنا عبر البريد الإلكتروني. تُخزن المعلومات على خوادم آمنة
+                ونستخدم تشفير HTTPS لحماية النقل. للمزيد من التفاصيل، تواصلوا معنا عبر Onstscop1@gmail.com.
               </p>
             </motion.div>
           )}
@@ -141,5 +135,5 @@ export default function Footer() {
         </motion.p>
       </div>
     </footer>
-  );
+);
 }

@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Almarai } from 'next/font/google';
+import { Phone, Send } from 'lucide-react';
 
 const almarai = Almarai({
   subsets: ['arabic'],
@@ -14,18 +15,16 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
-    workSector: '',
-    bank: '',
     message: '',
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    setFormData(prev => ({ ...prev, [id]: value }));
   };
 
   const submitForm = async (e: React.FormEvent) => {
@@ -37,19 +36,11 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      if (!res.ok) throw new Error();
-      setSuccess(true);
-      setFormData({
-        fullName: '',
-        phoneNumber: '',
-        workSector: '',
-        bank: '',
-        message: '',
-      });
-      formRef.current?.reset();
-      setTimeout(() => setSuccess(false), 3000);
+      if (!res.ok) throw new Error('Failed to send');
+      // فتح الاتصال بالهاتف مباشرة دون تفريغ الحقول
+      window.open('tel:0501402723', '_self');
     } catch {
-      // خطأ في الإرسال
+      alert('حدث خطأ أثناء الإرسال، حاول مرة أخرى.');
     } finally {
       setLoading(false);
     }
@@ -57,9 +48,9 @@ export default function ContactForm() {
 
   const sendToWhatsApp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const { fullName, phoneNumber, workSector, bank, message } = formData;
+    const { fullName, phoneNumber, message } = formData;
     const msg = encodeURIComponent(
-      `الاسم: ${fullName}\nالهاتف: ${phoneNumber}\nالقطاع: ${workSector}\nالبنك: ${bank}\nرسالتك: ${message}`
+      `الاسم: ${fullName}\nالهاتف: ${phoneNumber}\nرسالتك: ${message}`
     );
     window.open(`https://wa.me/966503405496?text=${msg}`, '_blank');
   };
@@ -68,8 +59,9 @@ export default function ContactForm() {
     <section id="contact" className="bg-gray-50 py-20" dir="rtl">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-6">
-          <h2 className={`${almarai.className} text-4xl font-bold text-gray-900`}>سجل اهتمامك</h2>
-          {/* خط كيرف أصفر متحرك تحت العنوان */}
+          <h2 className={`${almarai.className} text-4xl font-bold text-gray-900`}>
+            سجل اهتمامك
+          </h2>
           <div className="mt-2 flex justify-center">
             <motion.svg
               className="w-40 h-6"
@@ -94,7 +86,9 @@ export default function ContactForm() {
             </motion.svg>
           </div>
         </div>
-        <p className={`${almarai.className} text-center text-gray-600 mb-8`}>فكرتنا بيع عقار — املأ البيانات وسنتواصل معك قريبًا</p>
+        <p className={`${almarai.className} text-center text-gray-600 mb-8`}>
+          املأ البيانات وسنتواصل معك قريبًا
+        </p>
         <div className="bg-white shadow-lg rounded-2xl p-8">
           <form
             ref={formRef}
@@ -103,7 +97,9 @@ export default function ContactForm() {
           >
             {/* الاسم الكامل */}
             <div className="sm:col-span-2">
-              <label htmlFor="fullName" className={`${almarai.className} block text-gray-700 mb-2`}>الاسم الكامل</label>
+              <label htmlFor="fullName" className={`${almarai.className} block text-gray-700 mb-2`}>
+                الاسم الكامل
+              </label>
               <input
                 id="fullName"
                 type="text"
@@ -118,7 +114,9 @@ export default function ContactForm() {
 
             {/* رقم الهاتف */}
             <div className="sm:col-span-2">
-              <label htmlFor="phoneNumber" className={`${almarai.className} block text-gray-700 mb-2`}>رقم الهاتف</label>
+              <label htmlFor="phoneNumber" className={`${almarai.className} block text-gray-700 mb-2`}>
+                رقم الهاتف
+              </label>
               <input
                 id="phoneNumber"
                 type="tel"
@@ -133,7 +131,9 @@ export default function ContactForm() {
 
             {/* رسالتك */}
             <div className="sm:col-span-2">
-              <label htmlFor="message" className={`${almarai.className} block text-gray-700 mb-2`}>رسالتك</label>
+              <label htmlFor="message" className={`${almarai.className} block text-gray-700 mb-2`}>
+                رسالتك
+              </label>
               <textarea
                 id="message"
                 placeholder="اكتب رسالتك هنا"
@@ -141,8 +141,8 @@ export default function ContactForm() {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                className="w-full bg-gray-100 text-gray-800 placeholder-gray-500 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 rows={4}
+                className="w-full bg-gray-100 text-gray-800 placeholder-gray-500 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               />
             </div>
 
@@ -151,9 +151,10 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition flex justify-center items-center"
+                className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition flex justify-center items-center"
               >
-                {loading ? 'جارٍ الإرسال…' : 'إرسال'}
+                <Phone className="w-5 h-5 ml-2" />
+                اتصل بنا
               </button>
               <button
                 type="button"
@@ -161,14 +162,11 @@ export default function ContactForm() {
                 disabled={loading}
                 className="flex-1 bg-green-600 hover:bg-green-500 text-white font-semibold py-3 rounded-lg transition flex justify-center items-center"
               >
+                <Send className="w-5 h-5 ml-2" />
                 إرسال إلى واتساب
               </button>
             </div>
           </form>
-
-          {success && (
-            <div className="mt-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-center">تم الإرسال بنجاح!</div>
-          )}
         </div>
       </div>
     </section>

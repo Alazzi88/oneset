@@ -57,7 +57,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         `}
       >
         <Navbar />
-        {/* بيانات الـ JSON-LD لتعريف نشاطك العقاري محلياً */}
         <Script id="ld+json" type="application/ld+json">
           {`
           {

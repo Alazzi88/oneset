@@ -1,5 +1,4 @@
-// src/app/components/Footer.tsx
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import { X as XIcon, Instagram, Linkedin } from 'lucide-react';
@@ -14,8 +13,8 @@ const almarai = Almarai({
 
 const navigation = {
   main: [
-    { name: '0559109217', href: 'tel:0559109217' },
-    { name: 'Tanarcompany@gmail.com', href: 'mailto:Tanarcompany@gmail.com' },
+    { name: '0501402723', href: 'tel:0501402723' },
+    { name: 'Onstscop1@gmail.com', href: 'mailto:Onstscop1@gmail.com' },
   ],
   social: [
     { name: 'LinkedIn', href: 'https://www.linkedin.com/in/YourProfile' },
@@ -49,9 +48,6 @@ export default function Footer() {
 
           <span className="text-gray-200 px-3 py-1 rounded-md bg-gray-800/50">
             سجل تجاري: 1010970757
-          </span>
-          <span className="text-gray-200 px-3 py-1 rounded-md bg-gray-800/50">
-            رخصة فال: 1200025184
           </span>
         </nav>
 
@@ -129,7 +125,7 @@ export default function Footer() {
                 بالقوانين. يمكنكم طلب حذف بياناتكم أو تعديلها في أي وقت من خلال
                 التواصل معنا عبر البريد الإلكتروني. تُخزن المعلومات على خوادم آمنة
                 ونستخدم تشفير HTTPS لحماية النقل. للمزيد من التفاصيل، تواصلوا
-                معنا عبر Tanarcompany@gmail.com.
+                معنا عبر Onstscop1@gmail.com.
               </p>
             </motion.div>
           )}

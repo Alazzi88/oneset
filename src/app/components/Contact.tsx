@@ -22,9 +22,6 @@ export default function ContactForm() {
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleFieldChange = (field: 'workSector' | 'bank', value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;

@@ -18,9 +18,18 @@ const navigation = {
     { name: 'Onstscop1@gmail.com', href: 'mailto:Onstscop1@gmail.com' },
   ],
   social: [
-    { name: 'TikTok', href: 'https://www.tiktok.com/@YourProfile' },
-    { name: 'X',      href: 'https://x.com/YourProfile' },
-    { name: 'Instagram', href: 'https://www.instagram.com/YourProfile' },
+    {
+      name: 'TikTok',
+      href: 'https://www.tiktok.com/@onestscope?_t=ZS-8xJPb95iKoM&_r=1',
+    },
+    {
+      name: 'X',
+      href: 'https://x.com/onstscope?s=21',
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/onstscop/?igsh=MTU3NHFsNTh6aXZ2aQ%3D%3D#',
+    },
   ] as { name: string; href: string }[],
 };
 
@@ -46,7 +55,6 @@ export default function Footer() {
               {item.name}
             </a>
           ))}
-        
         </nav>
 
         {/* social */}
@@ -55,13 +63,7 @@ export default function Footer() {
             href={navigation.social[0].href}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              mx-[10px] flex items-center justify-center text-white 
-              bg-gradient-to-r from-black via-gray-800 to-gray-900 
-              hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-500 
-              shadow-lg shadow-black/50 
-              rounded-full sm:p-3 p-2 mt-4
-            "
+            className="mx-[10px] flex items-center justify-center text-white bg-gradient-to-r from-black via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-500 shadow-lg shadow-black/50 rounded-full sm:p-3 p-2 mt-4"
           >
             <SiTiktok className="md:w-6 md:h-6 w-5 h-5" />
           </a>
@@ -70,12 +72,7 @@ export default function Footer() {
             href={navigation.social[1].href}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              mx-[10px] flex items-center justify-center text-white 
-              bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-500 
-              shadow-lg shadow-black/50 
-              rounded-full sm:p-3 p-2 mt-4
-            "
+            className="mx-[10px] flex items-center justify-center text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-500 shadow-lg shadow-black/50 rounded-full sm:p-3 p-2 mt-4"
           >
             <XIcon className="md:w-6 md:h-6 w-5 h-5" />
           </a>
@@ -84,13 +81,7 @@ export default function Footer() {
             href={navigation.social[2].href}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              mx-[10px] flex items-center justify-center text-white 
-              bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 
-              hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 
-              shadow-lg shadow-pink-500/50 
-              rounded-full sm:p-3 p-2 mt-4
-            "
+            className="mx-[10px] flex items-center justify-center text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 shadow-lg shadow-pink-500/50 rounded-full sm:p-3 p-2 mt-4"
           >
             <Instagram className="md:w-6 md:h-6 w-5 h-5" />
           </a>
@@ -135,5 +126,5 @@ export default function Footer() {
         </motion.p>
       </div>
     </footer>
-);
+  );
 }

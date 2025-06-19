@@ -215,12 +215,26 @@ function PropertyCard({ item }: { item: Listing }) {
     <>
       <motion.div initial={{ scale: 1 }} whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }} className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg overflow-hidden flex flex-col">
         <div className="relative w-full h-64 cursor-pointer" onClick={() => openModal(0)}>
-          <Image src={item.coverImageUrl} alt={`${item.title} - غلاف`} fill loading="lazy" className="object-cover object-top rounded-t-2xl" />
+          <Image
+            src={item.coverImageUrl}
+            alt={`${item.title} - غلاف`}
+            fill
+            loading="lazy"
+            sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover object-top rounded-t-2xl"
+          />
         </div>
         <div className="flex flex-row-reverse p-4 space-x-2 space-x-reverse overflow-x-auto">
           {item.imageUrls.map((url, idx) => (
             <div key={idx} className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer" onClick={() => openModal(idx)}>
-              <Image src={url} alt={`${item.title} - صورة ${idx+1}`} fill loading="lazy" className="object-cover" />
+              <Image
+                src={url}
+                alt={`${item.title} - صورة ${idx + 1}`}
+                fill
+                loading="lazy"
+                sizes="80px"
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
@@ -228,7 +242,7 @@ function PropertyCard({ item }: { item: Listing }) {
           <h3 className={`text-lg font-semibold text-gray-800 ${almarai.className}`}>{item.title}</h3>
           <p className={`text-sm text-gray-600 ${almarai.className}`}>{item.location}</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            {item.features.map((feat,i) => (
+            {item.features.map((feat, i) => (
               <span key={i} className="flex items-center bg-gradient-to-br from-gray-900/60 to-gray-900/30 text-white px-3 py-1 rounded-full text-xs shadow-sm">
                 <CheckCircle className="w-4 h-4 ml-1" />{feat}
               </span>

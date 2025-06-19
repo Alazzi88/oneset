@@ -52,7 +52,7 @@ export default function ContactForm() {
     const msg = encodeURIComponent(
       `الاسم: ${fullName}\nالهاتف: ${phoneNumber}\nرسالتك: ${message}`
     );
-    window.open(`https://wa.me/966503405496?text=${msg}`, '_blank');
+    window.open(`https://wa.me/966501402723?text=${msg}`, '_blank');
   };
 
   return (

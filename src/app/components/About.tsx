@@ -2,12 +2,14 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Almarai } from 'next/font/google';
-import { motion } from 'framer-motion'; // <-- إضافة import للحركة
+import { motion } from 'framer-motion';
 import {
   DeviceTabletIcon,
   ChartBarIcon,
   UserGroupIcon,
+  CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
 
 const almarai = Almarai({
@@ -17,20 +19,17 @@ const almarai = Almarai({
 });
 
 export default function About() {
-  // مسار الصورة المعدّل
   const imageUrl = '/img/img2.webp';
 
   return (
     <section id="about" className="bg-gray-50 py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-12">
-        
         {/* ====== الجزء الأيسر: نص ومزايا ====== */}
         <div className="w-full lg:w-1/2">
           <div className="inline-block">
             <h2 className={`text-4xl lg:text-5xl font-bold text-gray-900 ${almarai.className}`}>
               من نحن
             </h2>
-            {/* خط منحني أصفر متحرك تحت العنوان */}
             <div className="mt-2">
               <motion.svg
                 className="w-32 h-6"
@@ -39,10 +38,9 @@ export default function About() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <motion.path
-                  // مسار منحني بسيط (كيرف)
                   d="M5 10 C 25 20, 45 0, 65 10 S 105 20, 115 10"
-                  stroke="#FBBF24"         // اللون الأصفر
-                  strokeWidth="4"           // سمك الخط
+                  stroke="#FBBF24"
+                  strokeWidth={4}
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
@@ -105,7 +103,7 @@ export default function About() {
 
             {/* بطاقة 4 */}
             <div className="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
-              <DeviceTabletIcon className="h-8 w-8 text-yellow-500 flex-none" />
+              <CurrencyDollarIcon className="h-8 w-8 text-yellow-500 flex-none" />
               <div>
                 <h3 className={`text-xl font-semibold text-gray-800 ${almarai.className}`}>
                   أسعار تنافسية
@@ -118,13 +116,15 @@ export default function About() {
           </div>
         </div>
 
-        {/* ====== الجزء الأيمن: صورة دائرية صغيرة ====== */}
+        {/* ====== الجزء الأيمن: صورة دائرية محسنة للـ LCP ====== */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-          <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-full shadow-xl">
-            <img
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
+            <Image
               src={imageUrl}
               alt="وحدات جاهزة"
-              className="w-full h-full object-cover object-center"
+              fill
+              className="rounded-full object-cover object-center shadow-xl"
+              priority
             />
           </div>
         </div>

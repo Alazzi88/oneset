@@ -1,7 +1,7 @@
-// src/app/components/ServicesExample.tsx
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { Almarai } from 'next/font/google';
 import { motion } from 'framer-motion';
@@ -42,32 +42,48 @@ export default function ServicesExample() {
       {/* صور مصغرة للأجهزة الصغيرة */}
       <div className="flex xl:hidden justify-center mb-8">
         <div className="flex -space-x-6">
-          <div className="w-20 h-20 rounded-full border-2 border-white shadow-md overflow-hidden">
-            <img
+          <div className="w-20 h-20 rounded-full border-2 border-white shadow-md overflow-hidden relative">
+            <Image
               src="/img/img1.webp"
               alt="خدماتنا 1"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(max-width: 640px) 80px, 80px"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-24 h-24 rounded-full border-2 border-white shadow-md overflow-hidden">
-            <img
+          <div className="w-24 h-24 rounded-full border-2 border-white shadow-md overflow-hidden relative">
+            <Image
               src="/img/img2.webp"
               alt="خدماتنا 2"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(max-width: 640px) 96px, 96px"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-28 h-28 rounded-full border-2 border-white shadow-md overflow-hidden">
-            <img
+          <div className="w-28 h-28 rounded-full border-2 border-white shadow-md overflow-hidden relative">
+            <Image
               src="/img/img3.webp"
               alt="خدماتنا 3"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(max-width: 640px) 112px, 112px"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-32 h-32 rounded-full border-2 border-white shadow-md overflow-hidden">
-            <img
+          <div className="w-32 h-32 rounded-full border-2 border-white shadow-md overflow-hidden relative">
+            <Image
               src="/img/img4.webp"
               alt="خدماتنا 4"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(max-width: 640px) 128px, 128px"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
         </div>
@@ -76,32 +92,48 @@ export default function ServicesExample() {
       {/* صور كبيرة متداخلة للأجهزة الكبيرة */}
       <div className="hidden xl:flex absolute right-0 top-1/2 transform -translate-y-1/2 pr-8">
         <div className="flex -space-x-12">
-          <div className="w-40 h-40 rounded-full border-4 border-white shadow-lg overflow-hidden">
-            <img
+          <div className="w-40 h-40 rounded-full border-4 border-white shadow-lg overflow-hidden relative">
+            <Image
               src="/img/img1.webp"
               alt="خدماتنا 1"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(min-width: 1280px) 160px, 100vw"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-48 h-48 -ml-12 rounded-full border-4 border-white shadow-lg overflow-hidden">
-            <img
+          <div className="w-48 h-48 rounded-full border-4 border-white shadow-lg overflow-hidden relative -ml-12">
+            <Image
               src="/img/img2.webp"
               alt="خدماتنا 2"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(min-width: 1280px) 192px, 100vw"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-56 h-56 -ml-12 rounded-full border-4 border-white shadow-lg overflow-hidden">
-            <img
+          <div className="w-56 h-56 rounded-full border-4 border-white shadow-lg overflow-hidden relative -ml-12">
+            <Image
               src="/img/img3.webp"
               alt="خدماتنا 3"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(min-width: 1280px) 224px, 100vw"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
-          <div className="w-64 h-64 -ml-12 rounded-full border-4 border-white shadow-lg overflow-hidden">
-            <img
+          <div className="w-64 h-64 rounded-full border-4 border-white shadow-lg overflow-hidden relative -ml-12">
+            <Image
               src="/img/img4.webp"
               alt="خدماتنا 4"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(min-width: 1280px) 256px, 100vw"
+              quality={75}
+              className="object-cover object-center"
+              loading="lazy"
             />
           </div>
         </div>
@@ -138,13 +170,7 @@ export default function ServicesExample() {
               </div>
             ))}
           </div>
-
-          {/* النقاط الاحترافية */}
-          
         </div>
-
-        {/* مساحة الصور للشاشات ≥1280px */}
-        
       </div>
     </section>
   );

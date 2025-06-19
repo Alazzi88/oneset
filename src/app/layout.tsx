@@ -28,10 +28,10 @@ export const metadata = {
   openGraph: {
     title: 'شقق ووحدات سكنية للبيع في حي الرمال – الرياض | Onset Scope',
     description: 'أفضل الوحدات السكنية للبيع في حي الرمال مع ضمانات وبنية تحتية حديثة.',
-    url: 'https://your-domain.com/riyadh-hai-alrimal',
+    url: 'https://onestscope.com/riyadh-hai-alrimal',
     images: [
       {
-        url: 'https://your-domain.com/images/rimal-cover.jpg',
+        url: 'https://onestscope.com/images/rimal-cover.webp',
         width: 1200,
         height: 630,
         alt: 'واجهة مشروع وحدات سكنية في حي الرمال'
@@ -43,7 +43,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'شقق ووحدات سكنية للبيع في حي الرمال – الرياض',
     description: 'اكتشف أفضل الوحدات السكنية للبيع في حي الرمال بالرياض مع ضمانات كاملة.',
-    images: ['https://your-domain.com/images/rimal-cover.jpg'],
+    images: ['https://onestscope.com/images/rimal-cover.webp'],
   },
 };
 
@@ -63,8 +63,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             "@context": "https://schema.org",
             "@type": "RealEstateAgent",
             "name": "Onset Scope",
-            "url": "https://your-domain.com",
-            "logo": "https://your-domain.com/logo.png",
+            "url": "https://onestscope.com",
+            "logo": "https://onestscope.com/logo.webp",
             "description": "أفضل الحلول العقارية لإدارة وبيع وتأجير الممتلكات في حي الرمال – الرياض",
             "address": {
               "@type": "PostalAddress",
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               "latitude": 24.7136,
               "longitude": 46.6753
             },
-            "telephone": "+966-5X-XXX-XXXX",
+            "telephone": "+966-501402723",
             "areaServed": {
               "@type": "City",
               "name": "الرياض"

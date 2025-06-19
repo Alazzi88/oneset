@@ -1,3 +1,4 @@
+// src/app/components/RealEstateGallery.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -5,11 +6,14 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Almarai } from 'next/font/google';
 import { X, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
-import StatsSection, { Stat } from './StatsSection'; // استيراد مكون المميزات ونوع Stat
+import StatsSection, { Stat } from './StatsSection';
 
-const almarai = Almarai({ subsets: ['arabic'], weight: ['400', '700'], display: 'swap' });
+const almarai = Almarai({
+  subsets: ['arabic'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
 
-// بيانات العقارات
 interface Listing {
   id: string;
   title: string;
@@ -97,143 +101,177 @@ const listings: Listing[] = [
   },
 ];
 
-// بيانات مميزات الموقع
 const stats: Stat[] = [
   { id: '1', name: 'طريق الأمير محمد بن سلمان', value: 'دقيقتان' },
-  { id: '2', name: 'المسار الرياضي', value: '4' },
-  { id: '3', name: 'محطة مترو الرياض', value: '15' },
-  { id: '4', name: 'المطار', value: '19' },
+  { id: '2', name: 'المسار الرياضي', value: '4 دقائق' },
+  { id: '3', name: 'محطة مترو الرياض', value: '15 دقيقة' },
+  { id: '4', name: 'المطار', value: '19 دقيقة' },
 ];
 
 export default function RealEstateGallery() {
-  const [modalState, setModalState] = useState<{ open: boolean; index: number; images: string[] }>({
-    open: false,
-    index: 0,
-    images: [],
-  });
+  const [modal, setModal] = useState<{
+    open: boolean;
+    images: string[];
+    index: number;
+  }>({ open: false, images: [], index: 0 });
 
-  const openModal = (images: string[], index: number) => {
-    setModalState({ open: true, images, index });
-  };
-  const closeModal = () => setModalState(s => ({ ...s, open: false }));
+  const openModal = (images: string[], idx: number) =>
+    setModal({ open: true, images, index: idx });
+  const closeModal = () =>
+    setModal(m => ({ ...m, open: false }));
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setModalState(s => ({ ...s, index: (s.index + 1) % s.images.length }));
+    setModal(m => ({
+      ...m,
+      index: (m.index + 1) % m.images.length,
+    }));
   };
   const prevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setModalState(s => ({ ...s, index: (s.index - 1 + s.images.length) % s.images.length }));
+    setModal(m => ({
+      ...m,
+      index: (m.index - 1 + m.images.length) % m.images.length,
+    }));
   };
 
   return (
     <>
-      <section id="projects" dir="rtl" className={`bg-gray-50 py-20 ${almarai.className}`}>        
-        <div className="container mx-auto px-6 lg:px-8">
-          {/* عنوان المشاريع */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">مشاريعنا</h2>
-            <motion.div className="mt-4 flex justify-center">
-              <motion.svg viewBox="0 0 120 20" className="w-40 h-6" fill="none">
-                <motion.path
-                  d="M5 10 C 25 20, 45 0, 65 10 S 105 20, 115 10"
-                  stroke="#FBBF24"
-                  strokeWidth={4}
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-                />
-              </motion.svg>
-            </motion.div>
-            <p className="mt-3 text-gray-700 max-w-xl mx-auto italic">
-              موقعنا في حي الرمال استراتيجي جدًا؛ قريب من المسار الرياضي والمطار والقناة المائية وطريق الأمير محمد بن سلمان. كما يتميز ببنية تحتية حديثة ومتكاملة.
-            </p>
-          </div>
-
-          {/* مميزات الموقع */}
-          <StatsSection stats={stats} />
-
-          {/* شبكة البطاقات */}
-          <div className="mt-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {listings.map(item => (
-              <motion.div
-                key={item.id}
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg overflow-hidden flex flex-col"
-              >
-                <div className="relative w-full h-64 cursor-pointer" onClick={() => openModal(item.imageUrls, 0)}>
-                  <Image
-                    src={item.coverImageUrl}
-                    alt={item.title}
-                    fill
-                    className="object-cover object-top rounded-t-2xl"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  />
-                </div>
-                <div className="flex overflow-x-auto p-4 space-x-2">
-                  {item.imageUrls.map((url, idx) => (
-                    <div
-                      key={idx}
-                      className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer"
-                      onClick={() => openModal(item.imageUrls, idx)}
-                    >
-                      <Image src={url} alt={`${item.title}-${idx}`} fill className="object-cover" />
-                    </div>
-                  ))}
-                </div>
-                <div className="px-6 pb-6 flex-1 flex flex-col">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{item.location}</p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {item.features.map((f, i) => (
-                      <span key={i} className="inline-flex items-center bg-gradient-to-br from-gray-900/60 to-gray-900/30 text-white px-3 py-1 rounded-full text-xs">
-                        <CheckCircle className="w-4 h-4 ml-1" />{f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      <section
+        id="projects"
+        dir="rtl"
+        className={`bg-gray-50 py-20 ${almarai.className}`}
+      >
+        <div className="container mx-auto px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
+            مشاريعنا
+          </h2>
+          <motion.svg
+            viewBox="0 0 120 20"
+            className="w-40 h-6 mx-auto mt-4"
+            fill="none"
+          >
+            <motion.path
+              d="M5 10 C25 20,45 0,65 10 S105 20,115 10"
+              stroke="#FBBF24"
+              strokeWidth={4}
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'easeInOut',
+              }}
+            />
+          </motion.svg>
+          <p className="mt-3 text-gray-700 max-w-xl mx-auto italic">
+            موقعنا في حي الرمال استراتيجي جدًا؛ قريب من المسار الرياضي والمطار وطريق الأمير محمد بن سلمان.
+          </p>
         </div>
 
-        {/* منحنى أسفل القسم */}
-      
+        <StatsSection stats={stats} />
+
+        <div className="mt-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 lg:px-8">
+          {listings.map(item => (
+            <motion.div
+              key={item.id}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col"
+            >
+              <div
+                onClick={() => openModal(item.imageUrls, 0)}
+                className="relative w-full h-64 cursor-pointer"
+              >
+                <Image
+                  src={item.coverImageUrl}
+                  alt={item.title}
+                  fill
+                  className="object-cover object-top rounded-t-2xl"
+                  sizes="(min-width:1024px)33vw,(min-width:640px)50vw,100vw"
+                />
+              </div>
+
+              <div className="flex overflow-x-auto p-4 space-x-2">
+                {item.imageUrls.map((url, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => openModal(item.imageUrls, idx)}
+                    className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer"
+                  >
+                    <Image
+                      src={url}
+                      alt={`${item.title} صورة ${idx + 1}`}
+                      fill
+                      loading="lazy"
+                      className="object-cover"
+                      sizes="80px"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="px-6 pb-6 flex-1 flex flex-col">
+                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.location}</p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {item.features.map((f, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center bg-gradient-to-br from-gray-900/60 to-gray-900/30 text-white px-3 py-1 rounded-full text-xs"
+                    >
+                      <CheckCircle className="w-4 h-4 ml-1" />
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
-      {/* مودال الصور */}
       <AnimatePresence>
-        {modalState.open && (
+        {modal.open && (
           <motion.div
+            onClick={closeModal}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
-            onClick={closeModal}
           >
             <motion.div
+              onClick={e => e.stopPropagation()}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-3xl max-h-[90vh]"
-              onClick={e => e.stopPropagation()}
+              className="relative p-4 w-full max-w-3xl"
             >
               <Image
-                src={modalState.images[modalState.index]}
-                alt={`modal-${modalState.index}`}
-                fill
-                className="object-contain rounded-lg"
+                src={modal.images[modal.index]}
+                alt={`slide-${modal.index}`}
+                width={800}
+                height={600}
+                className="object-contain rounded-lg max-h-[90vh] mx-auto"
               />
-              <button onClick={prevImage} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 bg-white bg-opacity-70 rounded-full hover:bg-opacity-100">
+              <button
+                onClick={prevImage}
+                className="absolute top-1/2 left-4 -translate-y-1/2 p-2 bg-white bg-opacity-70 rounded-full hover:bg-opacity-100"
+              >
                 <ChevronLeft size={24} />
               </button>
-              <button onClick={nextImage} className="absolute top-1/2 right-4 -translate-y-1/2 p-2 bg-white bg-opacity-70 rounded-full hover:bg-opacity-100">
+              <button
+                onClick={nextImage}
+                className="absolute top-1/2 right-4 -translate-y-1/2 p-2 bg-white bg-opacity-70 rounded-full hover:bg-opacity-100"
+              >
                 <ChevronRight size={24} />
               </button>
-              <X onClick={closeModal} className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer" />
+              <X
+                onClick={closeModal}
+                className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
+              />
             </motion.div>
           </motion.div>
         )}

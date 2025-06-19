@@ -31,19 +31,19 @@ export const metadata = {
     url: 'https://onestscope.com/riyadh-hai-alrimal',
     images: [
       {
-        url: 'https://onestscope.com/images/rimal-cover.webp',
-        width: 1200,
-        height: 630,
-        alt: 'واجهة مشروع وحدات سكنية في حي الرمال'
+        url: 'https://onestscope.com/logo.webp', // هنا اللوجو بدلاً من rimal-cover
+        width: 600,   // حجم افتراضي مناسب للوجو
+        height: 60,
+        alt: 'شعار Onset Scope'
       }
     ],
     siteName: 'Onset Scope',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',       // لوجو صغير يكفي
     title: 'شقق ووحدات سكنية للبيع في حي الرمال – الرياض',
     description: 'اكتشف أفضل الوحدات السكنية للبيع في حي الرمال بالرياض مع ضمانات كاملة.',
-    images: ['https://onestscope.com/images/rimal-cover.webp'],
+    images: ['https://onestscope.com/logo.webp'], // اللوجو
   },
 };
 

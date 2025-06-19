@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const phone = '966503405496';
+  const phone = '966501402723';
   return (
     <motion.a
       href={`https://wa.me/${phone}`}

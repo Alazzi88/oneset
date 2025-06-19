@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 interface CompanyMapEmbedProps {
   embedUrl?: string;
@@ -15,7 +15,7 @@ const CompanyMapEmbed: React.FC<CompanyMapEmbedProps> = ({
 }) => {
   return (
     <div
-      className="w-full max-w-xl mx-auto my-6 rounded-lg overflow-hidden shadow-lg"
+      className="w-full max-w-xl mx-auto mt-6 mb-0 rounded-lg overflow-hidden shadow-lg"
       style={{ width, height }}
     >
       <iframe

@@ -16,7 +16,7 @@ const almarai = Almarai({
 
 // بيانات الـ SEO
 export const metadata = {
-  title: 'شقق ووحدات سكنية للبيع في حي الرمال – الرياض | Onset Scope',
+  title: ' Onset Scope',
   description: 'اكتشف أفضل الوحدات السكنية للبيع في حي الرمال بالرياض. ضمن بنية تحتية حديثة، ضمانات كاملة، وخدمات متكاملة لتجربة شراء مريحة وآمنة.',
   keywords: [
     'عقارات الرياض',
